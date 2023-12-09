@@ -37,7 +37,7 @@ Linux:<br><code>source ./venv/bin/activate</code><br>
 Windows:<br><code> .\venv\Scripts\activate</code><br><br>
 Устанавливаем необходимые зависимости:<br>
 <code>pip install aiogram psycopg2 sqlalchemy</code><br>
-ВАЖНОЕ ПРИМЕЧАНИЕ! На линуксе может возникнуть ошибка, поэтому устанвливаем psycopg2-binary
+ВАЖНОЕ ПРИМЕЧАНИЕ! Если на линуксе ошибка - устанвливаем psycopg2-binary
 <br><br>
 Поднимаем базу данных с помощью докера:<br>
 <code>docker-compose up</code><br>
