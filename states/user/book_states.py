@@ -1,5 +1,5 @@
 from main import user_router, bot, genre_list
-from keyboards import main_markup, cancel_state_markup, book_genres_markup
+from keyboards import main_markup, cancel_state_markup, book_genres_markup, found_books_markup
 from database import db
 
 from aiogram import types, filters, F
@@ -13,6 +13,23 @@ class BookStates(StatesGroup):
     book_description = State()
     book_genre = State()
     book_my_genre = State()
+
+    find_book_by_key_word = State()
+
+
+@user_router.message(BookStates.find_book_by_key_word)
+async def search_book_by_key_word_state(message: types.Message, state: FSMContext):
+    key_word = message.text
+
+    found_books = db.get_found_books_by_key_word(key_word)
+
+    if len(found_books) == 0:
+        await message.answer('<b>📥 По Вашему запросу, к сожалению, не нашлась ни одна книга :(</b>')
+    else:
+        await message.answer(text='<b>🔍 Список найденных книг по Вашему запросу!</b>',
+                             reply_markup=found_books_markup(key_word))
+
+    await state.clear()
 
 
 @user_router.message(BookStates.book_name)

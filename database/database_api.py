@@ -51,13 +51,13 @@ class Database:
     def get_book_list(self):
         return self.session.query(Books).all()
 
-    def get_search_result(self, key_word):
-        print(self.session.query(Books).filter(
-            or_(
-                Books.book_name.like(f'%{key_word}%'),
-                Books.book_author.like(f'%{key_word}%')
-               )
-            ).all())
+    def get_found_books_by_key_word(self, key_word):
+        return self.session.query(Books).filter(
+                or_(
+                    Books.book_name.like(f'%{key_word}%'),
+                    Books.book_author.like(f'%{key_word}%')
+                   )
+                ).all()
 
     def get_book(self, book_id):
         return self.session.query(Books).filter_by(id=book_id).first()
