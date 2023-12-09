@@ -4,10 +4,12 @@ from aiogram import filters, types
 
 
 class IsNotAnEmptyMyBookList(filters.BaseFilter):
-    async def __call__(self, *args, **kwargs):
-        book_list = db.get_book_list()
+    async def __call__(self, message: types.Message, *args, **kwargs):
+        chat_id = message.from_user.id
 
-        if book_list is None:
+        my_book_list = db.get_my_book_list(chat_id)
+
+        if len(my_book_list) == 0:
             return True
         else:
             return False

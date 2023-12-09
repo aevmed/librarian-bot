@@ -1,1 +1,1 @@
-from .books import IsNotAnEmptyBookList
+from .books import IsNotAnEmptyBookList, IsNotAnEmptyMyBookList

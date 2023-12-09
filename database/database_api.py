@@ -2,6 +2,7 @@ import datetime
 
 from sqlalchemy import create_engine, Column, Integer, Text, BigInteger, Float
 from sqlalchemy.orm import declarative_base, Session
+from sqlalchemy.sql.expression import or_
 
 now_date = datetime.datetime.now()
 now_date = now_date.strftime('%Y-%m-%d %H:%M:%S')
@@ -27,6 +28,7 @@ class Books(Base):
     book_name = Column(Text)
     book_author = Column(Text)
     book_description = Column(Text)
+    book_genre = Column(Text)
     book_owner = Column(BigInteger)
     date = Column(Text)
 
@@ -47,4 +49,27 @@ class Database:
         self.session.commit()
 
     def get_book_list(self):
-        self.session.query(Books).all()
+        return self.session.query(Books).all()
+
+    def get_search_result(self, key_word):
+        print(self.session.query(Books).filter(
+            or_(
+                Books.book_name.like(f'%{key_word}%'),
+                Books.book_author.like(f'%{key_word}%')
+               )
+            ).all())
+
+    def get_book(self, book_id):
+        return self.session.query(Books).filter_by(id=book_id).first()
+
+    def add_book(self, book_name, book_author, book_description, book_genre, chat_id):
+        self.session.add(Books(book_name=book_name, book_author=book_author, book_description=book_description,
+                               book_genre=book_genre, book_owner=chat_id, date=now_date))
+        self.session.commit()
+
+    def get_my_book_list(self, chat_id):
+        return self.session.query(Books).filter_by(book_owner=chat_id).all()
+
+    def delete_book(self, book_id):
+        self.session.query(Books).filter_by(id=book_id).delete()
+        self.session.commit()

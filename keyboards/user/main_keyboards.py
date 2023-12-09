@@ -2,11 +2,11 @@ from aiogram import types
 from aiogram.utils.keyboard import ReplyKeyboardBuilder
 
 
-def main_keyboard():
+def main_markup():
     builder = ReplyKeyboardBuilder()
 
     markups = [
-        types.KeyboardButton(text='📃 Список всех книг'),
+        types.KeyboardButton(text='📚 Список всех книг'),
         types.KeyboardButton(text='🔎 Поиск книги'),
         types.KeyboardButton(text='📌 Добавить свою книгу'),
         types.KeyboardButton(text='🗑️ Удалить книгу')

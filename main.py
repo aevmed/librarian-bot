@@ -6,7 +6,7 @@ from aiogram import Bot, Router
 
 
 config = configparser.ConfigParser()
-config.read('config.ini')
+config.read('config.ini', 'utf-8')
 
 
 # //////////// SETTINGS //////////////
@@ -14,6 +14,13 @@ config.read('config.ini')
 token = config.get('SETTINGS', 'token')
 bot = Bot(token=token, parse_mode='HTML')
 
+
+genres = config.get('SETTINGS', 'genres')
+
+genre_list = []
+
+for genre in genres.split(','):
+    genre_list.append(genre)
 
 # //////////// ROUTERS ////////////
 
