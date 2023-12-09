@@ -10,7 +10,7 @@ config.read('config.ini')
 # //////////// SETTINGS //////////////
 
 token = config.get('SETTINGS', 'token')
-bot = Bot(token)
+bot = Bot(token=token, parse_mode='HTML')
 
 
 # //////////// ROUTERS ////////////

@@ -3,11 +3,14 @@ import asyncio
 from main import bot
 from handlers import user_router
 from others import set_commands
+from database import db
 
 from aiogram import Dispatcher
 
 
 async def on_startup():
+    db.create_tables()
+    # ///////////////////////
     await set_commands(bot)
 
 
