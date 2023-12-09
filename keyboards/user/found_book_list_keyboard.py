@@ -1,5 +1,3 @@
-import math
-
 from database import db
 
 from aiogram import types
