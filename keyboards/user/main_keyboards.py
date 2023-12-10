@@ -2,6 +2,7 @@ from aiogram import types
 from aiogram.utils.keyboard import ReplyKeyboardBuilder
 
 
+# Разметка меню
 def main_markup():
     builder = ReplyKeyboardBuilder()
 
