@@ -6,6 +6,7 @@ from aiogram import BaseMiddleware
 from aiogram.types import TelegramObject
 
 
+# Обрабатываем каждый апдейт от человека и добавляем в бд, если его нет
 class UserMiddleware(BaseMiddleware):
     async def __call__(
             self,
