@@ -3,6 +3,7 @@ from database import db
 from aiogram import filters, types
 
 
+# Проверка списка моих книг
 class IsNotAnEmptyMyBookList(filters.BaseFilter):
     async def __call__(self, message: types.Message, *args, **kwargs):
         chat_id = message.from_user.id
