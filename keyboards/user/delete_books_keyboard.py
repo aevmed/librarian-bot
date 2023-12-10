@@ -4,6 +4,7 @@ from aiogram import types
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 
+# Разметка списка книг пользователя для удаления
 def delete_books_markup(chat_id):
     builder = InlineKeyboardBuilder()
 
