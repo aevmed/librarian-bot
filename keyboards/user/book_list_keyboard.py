@@ -6,6 +6,7 @@ from aiogram import types
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 
+# Разметка кнопок с книжками с пагинацией элементов
 def book_list_markup(page=1, items_per_page=5):
     builder = InlineKeyboardBuilder()
 
@@ -39,6 +40,7 @@ def book_list_markup(page=1, items_per_page=5):
     return builder.as_markup()
 
 
+# Разметка клавитуры возвращения ко всему списку книг
 def book_markup(page):
     builder = InlineKeyboardBuilder()
 
