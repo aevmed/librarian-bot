@@ -6,6 +6,7 @@ from aiogram import types, F, filters
 from aiogram.fsm.context import FSMContext
 
 
+# Обработчик добавления книги 
 @user_router.message(F.text == '📌 Добавить свою книгу')
 async def book_list_message_handler(message: types.Message, state: FSMContext):
     question = await message.answer(text='<b>🌼 Введите название книги!</b>', reply_markup=cancel_state_markup())
