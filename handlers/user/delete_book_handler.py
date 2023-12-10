@@ -5,6 +5,7 @@ from database import db
 from aiogram import types, F
 
 
+# Обработчик удаления своих книг
 @user_router.message(F.text == '🗑️ Удалить книгу')
 async def book_list_message_handler(message: types.Message):
     chat_id = message.from_user.id
@@ -13,6 +14,7 @@ async def book_list_message_handler(message: types.Message):
                          reply_markup=delete_books_markup(chat_id))
 
 
+# Обработчик нажатия на книгу из списка
 @user_router.callback_query(F.data.startswith('delete_book'))
 async def delete_book_callback_handler(callback: types.CallbackQuery):
     callback_data = callback.data
