@@ -2,6 +2,7 @@ from aiogram import types
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 
+# Разметка кнопки отмены состояния машины
 def cancel_state_markup():
     builder = InlineKeyboardBuilder()
 
