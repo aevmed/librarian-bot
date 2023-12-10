@@ -7,6 +7,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
 
 
+# Создаем состояния машин
 class BookStates(StatesGroup):
     book_name = State()
     book_author = State()
@@ -16,6 +17,7 @@ class BookStates(StatesGroup):
 
     find_book_by_key_word = State()
 
+# Обрабатываем все состояния машин 
 
 @user_router.message(BookStates.find_book_by_key_word)
 async def search_book_by_key_word_state(message: types.Message, state: FSMContext):
@@ -65,6 +67,7 @@ async def book_description_state(message: types.Message, state: FSMContext):
     await state.set_state(BookStates.book_genre)
 
 
+# Обработка inline кнопки
 @user_router.callback_query(F.data == 'cancel_state', filters.StateFilter('*'))
 async def cancel_state_callback_handler(callback: types.CallbackQuery, state: FSMContext):
     check_state = await state.get_state()
@@ -96,6 +99,7 @@ async def cancel_state_callback_handler(callback: types.CallbackQuery, state: FS
         await state.clear()
 
 
+# Обработка reply кнопки
 @user_router.message(F.text == '🔙 Отмена', filters.StateFilter('BookStates:book_genre'))
 async def cancel_state_message_handler(message: types.Message, state: FSMContext):
     await message.answer(text='<b>❌ Вы отменили процесс добавления книги!</b>', reply_markup=main_markup())
