@@ -4,6 +4,7 @@ from keyboards import main_markup
 from aiogram import types, filters
 
 
+# Обработчик команды /start
 @user_router.message(filters.CommandStart())
 async def start_command_handler(message: types.Message):
     await message.answer(text=f'<b>Привет, @{message.from_user.username}!</b>👋\n\n'
