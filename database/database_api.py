@@ -59,7 +59,8 @@ class Database:
         return self.session.query(Books).filter(
                 or_(
                     Books.book_name.like(f'%{key_word}%'),
-                    Books.book_author.like(f'%{key_word}%')
+                    Books.book_author.like(f'%{key_word}%'),
+                    Books.book_genre.like(f'%{key_word}%')
                    )
                 ).all()
 
