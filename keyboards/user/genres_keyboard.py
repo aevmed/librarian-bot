@@ -4,6 +4,7 @@ from aiogram import types
 from aiogram.utils.keyboard import ReplyKeyboardBuilder
 
 
+# Разметка жанров в состоянии машины 
 def book_genres_markup():
     builder = ReplyKeyboardBuilder()
 
