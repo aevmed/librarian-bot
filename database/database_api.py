@@ -41,20 +41,25 @@ class Database:
     def __init__(self):
         self.session = Session(bind=engine)
 
+    # init tables
     @staticmethod
     def create_tables():
         Base.metadata.create_all(engine)
 
+    # Проверям наличие юзера в бд
     def check_user(self, chat_id):
         return bool(self.session.query(Users).filter_by(chat_id=chat_id).first())
 
+    # Добавляем юзера
     def add_user(self, chat_id, username):
         self.session.add(Users(chat_id=chat_id, username=username, date=now_date))
         self.session.commit()
 
+    # Получаем список всех книг
     def get_book_list(self):
         return self.session.query(Books).all()
 
+    # Получаем список книг по ключ слову
     def get_found_books_by_key_word(self, key_word):
         return self.session.query(Books).filter(
                 or_(
@@ -64,17 +69,25 @@ class Database:
                    )
                 ).all()
 
+    
+    # Получаем определенную книгу по айди
     def get_book(self, book_id):
         return self.session.query(Books).filter_by(id=book_id).first()
 
+
+    # Добавляем книгу в бд
     def add_book(self, book_name, book_author, book_description, book_genre, chat_id):
         self.session.add(Books(book_name=book_name, book_author=book_author, book_description=book_description,
                                book_genre=book_genre, book_owner=chat_id, date=now_date))
         self.session.commit()
 
+
+    # Получаем список своих книг
     def get_my_book_list(self, chat_id):
         return self.session.query(Books).filter_by(book_owner=chat_id).all()
 
+
+    # Удаляем книгу по айди
     def delete_book(self, book_id):
         self.session.query(Books).filter_by(id=book_id).delete()
         self.session.commit()
