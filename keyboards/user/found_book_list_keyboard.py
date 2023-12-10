@@ -4,6 +4,7 @@ from aiogram import types
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 
+# Разметка найденных книг по ключевому слову или фразе 
 def found_books_markup(key_word):
     builder = InlineKeyboardBuilder()
 
