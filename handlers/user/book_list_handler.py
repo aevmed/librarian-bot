@@ -5,12 +5,14 @@ from keyboards import book_list_markup, book_markup
 from aiogram import types, F
 
 
+# Обработчик списка всех книг
 @user_router.message(F.text == '📚 Список всех книг')
 async def book_list_message_handler(message: types.Message):
     await message.answer(text='<b>📚 Список загруженных книг</b>',
                          reply_markup=book_list_markup())
 
 
+# Обработчик перехода на книгу из списка книг
 @user_router.callback_query(F.data.startswith('book'))
 async def book_callback_handler(callback: types.CallbackQuery):
     await callback.answer('')
@@ -41,6 +43,7 @@ async def back_to_book_list_callback_handler(callback: types.CallbackQuery):
                                      reply_markup=book_list_markup(page=page))
 
 
+# Обработчик пагинации вперед
 @user_router.callback_query(F.data.startswith('pg_next'))
 async def pagination_next_callback_handler(callback: types.CallbackQuery):
     await callback.answer('')
@@ -52,6 +55,7 @@ async def pagination_next_callback_handler(callback: types.CallbackQuery):
     await callback.message.edit_reply_markup(reply_markup=book_list_markup(page=page + 1))
 
 
+# Обработчик пагинации назад
 @user_router.callback_query(F.data.startswith('pg_back'))
 async def pagination_back_callback_handler(callback: types.CallbackQuery):
     await callback.answer('')
