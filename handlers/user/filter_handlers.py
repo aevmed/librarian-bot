@@ -15,6 +15,7 @@ async def delete_books_handler(message: types.Message):
 async def filter_book_list_message_handler(message: types.Message):
     await message.answer('<b>⭕ К сожалению, список книг пуст :(</b>')
 
+
 # Обработчик фильтра списка для поиска книг
 @user_router.message(IsNotAnEmptyBookList(), F.text == '🔎 Поиск книги')
 async def filter_find_book_message_handler(message: types.Message):
