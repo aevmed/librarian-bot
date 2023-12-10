@@ -7,11 +7,13 @@ from sqlalchemy.sql.expression import or_
 now_date = datetime.datetime.now()
 now_date = now_date.strftime('%Y-%m-%d %H:%M:%S')
 
+# Создаем соединение
 engine = create_engine('postgresql://postgres:postgres@localhost:5432/bot')
 
 Base = declarative_base()
 
 
+# Таблица users
 class Users(Base):
     __tablename__ = 'users'
 
@@ -21,6 +23,7 @@ class Users(Base):
     date = Column(Text)
 
 
+# Таблица books
 class Books(Base):
     __tablename__ = 'books'
 
@@ -33,6 +36,7 @@ class Books(Base):
     date = Column(Text)
 
 
+# database api
 class Database:
     def __init__(self):
         self.session = Session(bind=engine)
